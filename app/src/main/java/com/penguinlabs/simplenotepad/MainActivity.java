@@ -14,6 +14,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import android.text.Editable;
+import android.text.TextWatcher;
+
 public class MainActivity extends AppCompatActivity {
 
     // Variable gulo declare kora
@@ -59,6 +62,22 @@ public class MainActivity extends AppCompatActivity {
                 // User-ke message dewa
                 Toast.makeText(MainActivity.this, "Saved Successfully!", Toast.LENGTH_SHORT).show();
             }
+        });
+
+        noteEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // User likhlei save hobe
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("note_key", s.toString());
+                editor.apply();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
         });
     }
 }

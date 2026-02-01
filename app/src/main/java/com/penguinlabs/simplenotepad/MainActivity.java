@@ -17,11 +17,13 @@ import androidx.core.view.WindowInsetsCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class MainActivity extends AppCompatActivity {
 
     // Variable gulo declare kora
     private EditText noteEditText;
-    private Button saveButton;
+    private FloatingActionButton saveButton;
     private SharedPreferences sharedPreferences;
 
     @Override

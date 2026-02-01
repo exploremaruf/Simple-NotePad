@@ -52,15 +52,18 @@ public class MainActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String noteText = noteEditText.getText().toString();
+// ছোট একটি ক্লিক অ্যানিমেশন
+                v.animate().scaleX(0.9f).scaleY(0.9f).setDuration(100).withEndAction(() -> {
+                    v.animate().scaleX(1f).scaleY(1f).setDuration(100).start();
 
-                // Note-ta save kora
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("note_key", noteText);
-                editor.apply();
+                    // তোমার আগের সেভ করার লজিক
+                    String noteText = noteEditText.getText().toString();
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("note_key", noteText);
+                    editor.apply();
 
-                // User-ke message dewa
-                Toast.makeText(MainActivity.this, "Saved Successfully!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Saved Successfully!", Toast.LENGTH_SHORT).show();
+                }).start();
             }
         });
 

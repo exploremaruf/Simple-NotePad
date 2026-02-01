@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
 // ছোট একটি ক্লিক অ্যানিমেশন
                 v.animate().scaleX(0.9f).scaleY(0.9f).setDuration(100).withEndAction(() -> {
                     v.animate().scaleX(1f).scaleY(1f).setDuration(100).start();
+                    v.performHapticFeedback(android.view.HapticFeedbackConstants.VIRTUAL_KEY);
 
                     // তোমার আগের সেভ করার লজিক
                     String noteText = noteEditText.getText().toString();

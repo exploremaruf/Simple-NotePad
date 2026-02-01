@@ -63,6 +63,8 @@
         app:elevation="6dp"
         app:fabSize="normal"
         app:srcCompat="@android:drawable/ic_menu_save"
-        app:tint="@android:color/white" />
+        app:tint="@android:color/white"
+        android:hapticFeedbackEnabled="true"
+        />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

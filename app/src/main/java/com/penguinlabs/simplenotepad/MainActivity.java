@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton saveButton;
     private SharedPreferences sharedPreferences;
 
+    private  TextView wordCountText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         // 1. UI elements find kora
         noteEditText = findViewById(R.id.noteEditText);
         saveButton = findViewById(R.id.saveButton);
+        wordCountText=findViewById(R.id.wordCountText);
 
         // 2. SharedPreferences setup (Data save rakhar jonno)
         sharedPreferences = getSharedPreferences("NoteData", Context.MODE_PRIVATE);
@@ -112,6 +115,12 @@ public class MainActivity extends AppCompatActivity {
 
                 // ১ সেকেন্ড পর 'Saved' দেখাবে
                 statusText.postDelayed(() -> statusText.setText("Saved"), 1000);
+
+                String text = s.toString().trim();
+                int words = text.isEmpty() ? 0 : text.split("\\s+").length;
+                int chars = text.length();
+                wordCountText.setText("Words: " + words + " | Chars: " + chars);
+
             }
 
             @Override

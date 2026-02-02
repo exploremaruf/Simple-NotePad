@@ -96,8 +96,15 @@ public class MainActivity extends AppCompatActivity {
 
 // ২. Clear বাটন ক্লিক লজিক
         clearButton.setOnClickListener(v -> {
-            noteEditText.setText("");
-            Toast.makeText(this, "Cleared!", Toast.LENGTH_SHORT).show();
+            new android.app.AlertDialog.Builder(this)
+                    .setTitle("মুছে ফেলুন")
+                    .setMessage("আপনি কি সব লেখা মুছে ফেলতে চান?")
+                    .setPositiveButton("হ্যাঁ", (dialog, which) -> {
+                        noteEditText.setText("");
+                        Toast.makeText(this, "সব মুছে ফেলা হয়েছে", Toast.LENGTH_SHORT).show();
+                    })
+                    .setNegativeButton("না", null)
+                    .show();
         });
 
 // ৩. TextWatcher এর ভেতর স্ট্যাটাস পরিবর্তন

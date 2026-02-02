@@ -2,26 +2,41 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F9FA"
-    tools:context=".MainActivity">
+    android:background="#F8F9FA">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        app:elevation="0dp">
+        android:background="#FFFFFF"
+        app:elevation="2dp">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="আমার নোটপ্যাড"
-            app:titleTextColor="#212121"
-            app:titleCentered="true" />
+            android:paddingHorizontal="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="আমার নোটস"
+                android:textColor="#212121"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/clearButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@android:drawable/ic_menu_delete"
+                app:tint="#FF5252" />
+        </RelativeLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -35,20 +50,28 @@
             android:orientation="vertical"
             android:padding="20dp">
 
+            <TextView
+                android:id="@+id/statusText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:text="Saved"
+                android:textSize="12sp"
+                android:textColor="#808080"
+                android:layout_marginBottom="8dp"/>
+
             <EditText
                 android:id="@+id/noteEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:gravity="top"
-                android:hint="আপনার মনের কথা লিখুন..."
+                android:hint="এখনি লেখা শুরু করুন..."
                 android:inputType="textMultiLine"
-                android:minHeight="400dp"
+                android:minHeight="500dp"
                 android:textColor="#333333"
-                android:textColorHint="#9E9E9E"
                 android:textSize="18sp"
                 android:lineSpacingMultiplier="1.2" />
-
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
@@ -58,13 +81,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="24dp"
-        android:contentDescription="Save Note"
         app:backgroundTint="#6200EE"
-        app:elevation="6dp"
-        app:fabSize="normal"
         app:srcCompat="@android:drawable/ic_menu_save"
         app:tint="@android:color/white"
-        android:hapticFeedbackEnabled="true"
-        />
+        android:hapticFeedbackEnabled="true" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

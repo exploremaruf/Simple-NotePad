@@ -60,6 +60,15 @@
                 android:textColor="#808080"
                 android:layout_marginBottom="8dp"/>
 
+            <TextView
+                android:id="@+id/wordCountText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="Words: 0 | Chars: 0"
+                android:textSize="12sp"
+                android:textColor="#808080" />
+
             <EditText
                 android:id="@+id/noteEditText"
                 android:layout_width="match_parent"

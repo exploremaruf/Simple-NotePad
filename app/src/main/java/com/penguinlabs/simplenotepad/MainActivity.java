@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -80,6 +82,36 @@ public class MainActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("note_key", s.toString());
                 editor.apply();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+        // ১. নতুন ভিউগুলো খুঁজে বের করা
+        TextView statusText = findViewById(R.id.statusText);
+        ImageButton clearButton = findViewById(R.id.clearButton);
+
+// ২. Clear বাটন ক্লিক লজিক
+        clearButton.setOnClickListener(v -> {
+            noteEditText.setText("");
+            Toast.makeText(this, "Cleared!", Toast.LENGTH_SHORT).show();
+        });
+
+// ৩. TextWatcher এর ভেতর স্ট্যাটাস পরিবর্তন
+        noteEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                statusText.setText("Saving...");
+
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("note_key", s.toString());
+                editor.apply();
+
+                // ১ সেকেন্ড পর 'Saved' দেখাবে
+                statusText.postDelayed(() -> statusText.setText("Saved"), 1000);
             }
 
             @Override

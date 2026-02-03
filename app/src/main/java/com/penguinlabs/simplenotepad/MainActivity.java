@@ -37,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView statusText;
 
-    private ImageButton clearButton;
+    private ImageButton clearButton, undoButton, redoButton;
+
     private TextView lastEditedText;
 
     private final Handler handler = new Handler(Looper.getMainLooper());
@@ -61,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
         saveButton = findViewById(R.id.saveButton);
         wordCountText = findViewById(R.id.wordCountText);
         statusText = findViewById(R.id.statusText);
+        undoButton = findViewById(R.id.undoButton);
+        redoButton = findViewById(R.id.redoButton);
         clearButton = findViewById(R.id.clearButton);
         lastEditedText = findViewById(R.id.lastEditedText);
         String lastTime = sharedPreferences.getString("last_time", "-");
@@ -145,13 +148,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void saveToStorage(String text) {
+
         String currentTime = getCurrentTime();
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("note_key", text);
         editor.putString("last_time", currentTime);
         editor.apply();
-
 
         lastEditedText.setText("শেষ পরিবর্তন: " + currentTime);
     }

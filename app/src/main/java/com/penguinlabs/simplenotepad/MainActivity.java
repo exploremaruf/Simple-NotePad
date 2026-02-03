@@ -1,6 +1,7 @@
 package com.penguinlabs.simplenotepad;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.Intent;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
@@ -77,6 +79,26 @@ public class MainActivity extends AppCompatActivity {
                     })
                     .setNegativeButton("না", null)
                     .show();
+        });
+
+        ImageButton shareButton = findViewById(R.id.shareButton);
+
+        shareButton.setOnClickListener(v -> {
+            String noteText = noteEditText.getText().toString().trim();
+
+            if (!noteText.isEmpty()) {
+
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, noteText);
+
+                startActivity(Intent.createChooser(shareIntent, "নোটটি শেয়ার করুন"));
+
+                v.performHapticFeedback(android.view.HapticFeedbackConstants.VIRTUAL_KEY);
+            } else {
+
+                Toast.makeText(this, "শেয়ার করার জন্য কিছু লিখুন!", Toast.LENGTH_SHORT).show();
+            }
         });
 
         noteEditText.addTextChangedListener(new TextWatcher() {

@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView statusText;
 
     private ImageButton clearButton;
+    private TextView lastEditedText;
 
     private final Handler handler = new Handler(Looper.getMainLooper());
 
@@ -61,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
         wordCountText = findViewById(R.id.wordCountText);
         statusText = findViewById(R.id.statusText);
         clearButton = findViewById(R.id.clearButton);
+        lastEditedText = findViewById(R.id.lastEditedText);
+        String lastTime = sharedPreferences.getString("last_time", "-");
+        lastEditedText.setText("শেষ পরিবর্তন: " + lastTime);
 
         sharedPreferences = getSharedPreferences("NoteData", Context.MODE_PRIVATE);
 
@@ -141,10 +145,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void saveToStorage(String text) {
+        String currentTime = getCurrentTime();
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("note_key", text);
+        editor.putString("last_time", currentTime);
         editor.apply();
+
+
+        lastEditedText.setText("শেষ পরিবর্তন: " + currentTime);
     }
 
     private void updateWordCount(String text) {
@@ -153,6 +162,11 @@ public class MainActivity extends AppCompatActivity {
         int words = trimmedText.isEmpty() ? 0 : trimmedText.split("\\s+").length;
         int chars = text.length();
         wordCountText.setText("Words: " + words + " | Chars: " + chars);
+    }
+
+    private String getCurrentTime() {
+
+        return new java.text.SimpleDateFormat("hh:mm a", java.util.Locale.getDefault()).format(new java.util.Date());
     }
 
 }
